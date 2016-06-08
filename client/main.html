@@ -1,6 +1,6 @@
 <head>
   <title>Battery Reporter</title>
-
+  <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600' rel='stylesheet' type='text/css'>
   <style>
   table, th, td {
     border: 1px solid black;
@@ -18,29 +18,79 @@
 
 <body>
   <h1>Home</h1>
+
+  {{> searchTable}}
+<!--
+  {{> searchform}}
+
   {{> batteryTable}}
+-->
 </body>
 
+<template name="searchform">
+  <form>
+    <input type="text" name="search" placeholder="Enter search term">
+    <input type="submit" value="Search">
+    <br>
+    <br>
+  </form>
+</template>
+
+<template name="searchTable">
+  {{> EasySearch.Input index=batteryIndex}}
+  <br>
+  <br>
+  <div>
+    <table>
+      <tr>
+          <th>Battery Serial Number</th>
+          <th>Device ID</th>
+          <th>Battery Percentage</th>
+          <th>Battery Charging Status</th>
+          <th>Timestamp</th>
+      </tr>
+      {{#EasySearch.Each index=batteryIndex}}
+        <tr>
+          <td><a href="http://localhost:3000/api/batteryList/{{_id}}">{{serialNumber}}</a></td>
+          <td>{{deviceId}}</td>
+          <td>{{batteryPercentage}}</td>
+          <td>{{batteryChargingStatus}}</td>
+          <td>{{timestamp}}</td>
+        </tr>
+      {{/EasySearch.Each}}
+    </table>
+  </div>
+  <!--
+  <ul>
+    {{#EasySearch.Each index=batteryIndex}}
+      <li>Battery Serial Number: {{serialNumber}}</li>
+    {{/EasySearch.Each}}
+  </ul>
+-->
+</template>
+
+<!--
 <template name="batteryTable">
   <div>
     <table>
       <tr>
 
-          <th>Battery ID</th>
+          <th>Battery Serial Number</th>
           <th>Device ID</th>
-          <th>Current Charge</th>
-          <th>Average Charge</th>
+          <th>Battery Percentage</th>
+          <th>Battery Charging Status</th>
           <th>Timestamp</th>
       </tr>
       {{#each batteryList}}
       <tr>
-        <td>{{batteryId}}</td>
+        <td>{{serialNumber}}</td>
         <td>{{deviceId}}</td>
-        <td>{{currentCharge}}</td>
-        <td>{{averageCharge}}</td>
-        <td>{{timeStamp}}</td>
+        <td>{{batteryPercentage}}</td>
+        <td>{{batteryChargingStatus}}</td>
+        <td>{{timestamp}}</td>
       </tr>
       {{/each}}
     </table>
   </div>
 </template>
+-->

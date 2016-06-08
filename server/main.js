@@ -7,8 +7,14 @@ batteryReports = new Mongo.Collection('batteryReports');
 
 testdb = new Mongo.Collection('testdb');
 
+batteryIndex = new EasySearch.Index({
+  collection: batteryList,
+  fields: ['serialNumber'],
+  engine: new EasySearch.Minimongo()
+});
+
 var Api = new Restivus({
-  useDefaultAuth: true,
+  useDefautAuth: true,
   prettyJson: true
 });
 
@@ -19,14 +25,20 @@ Api.addCollection(batteryReports);
 Api.addCollection(testdb);
 
 
-Api.addRoute('/batteryreports/:batteryId', {authRequired: false}, {
+Api.addRoute('batteryreports/:serialNumber', {authRequired: false}, {
   get: function () {
-    //return testdb.findOne({batteryId: this.urlParams.batteryId});
-    console.log(this.urlParams.batteryId);
-    return this.urlParams.batteryId;
+    var reports = batteryReports.find({"serialNumber": this.urlParams.serialNumber});
+    return reports;
   }
-
 });
+
+Api.addRoute('batterylist/:serialNumber', {authRequired: false}, {
+  get: function() {
+    var battery = batteryList.findOne({"serialNumber": this.urlParams.serialNumber});
+    return battery;
+  }
+});
+
 
 
 

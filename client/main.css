@@ -1,1 +1,73 @@
 /* CSS declarations go here */
+body {
+  font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: normal;
+  margin: 3em 0;
+  color: white;
+  padding: 0px;
+
+  background-color: #315481;
+
+  background-image: linear-gradient(to bottom, #333399, #8080ff 100%);
+
+  background-attachment: fixed;
+  width: 80%;
+  margin-right: auto;
+  margin-left: auto;
+
+}
+
+a {
+  color: white;
+  text-decoration: none;
+}
+
+a:link {
+  text-decoration: none;
+}
+
+a:visited {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+a:active {
+  text-decoration: none;
+}
+
+
+
+
+header {
+
+  background: #d2edf4;
+
+  background-image: linear-gradient(to bottom, #d0edf5, #e1e5f0 100%);
+
+  padding: 20px 15px 15px 15px;
+
+  position: relative;
+
+}
+
+
+
+
+
+
+form {
+
+  margin-top: 10px;
+
+  margin-bottom: -10px;
+
+  position: relative;
+
+}
+
+
+}
