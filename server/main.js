@@ -18,6 +18,8 @@ var Api = new Restivus({
   prettyJson: true
 });
 
+
+
 Api.addCollection(batteryList);
 
 Api.addCollection(batteryReports);
@@ -44,6 +46,12 @@ Api.addRoute('batterylist/:serialNumber', {authRequired: false}, {
 
 
 
-Meteor.startup(() => {
+Meteor.startup(function() {
+
+  return Meteor.methods({
+    cleanDatabase: function() {
+      return batteryList.remove({});
+    }
+  });
   // code to run on server at startup
 });
