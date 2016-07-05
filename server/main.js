@@ -13,6 +13,9 @@ batteryIndex = new EasySearch.Index({
   engine: new EasySearch.Minimongo()
 });
 
+
+
+/*
 var Api = new Restivus({
   useDefautAuth: true,
   prettyJson: true
@@ -40,7 +43,7 @@ Api.addRoute('batterylist/:serialNumber', {authRequired: false}, {
     return battery;
   }
 });
-
+*/
 
 
 

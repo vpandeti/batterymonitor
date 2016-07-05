@@ -13,11 +13,12 @@
   th, td {
     padding: 15px;
   }
+
   </style>
 </head>
 
 <body>
-  <h1>Home</h1>
+  <h1><a href="localhost:3000">Home</a></h1>
 
   {{> searchTable}}
 <!--
@@ -26,6 +27,7 @@
   {{> batteryTable}}
 -->
 </body>
+<!--
 
 <template name="searchform">
   <form>
@@ -35,6 +37,7 @@
     <br>
   </form>
 </template>
+-->
 
 <template name="searchTable">
   {{> EasySearch.Input index=batteryIndex}}
@@ -49,7 +52,7 @@
           <th>Battery Charging Status</th>
           <th>Timestamp</th>
       </tr>
-      {{#EasySearch.Each index=batteryIndex}}
+      {{#EasySearch.Each index=batteryIndex attributes=inputAttributes}}
         <tr>
           <td><a href="/api/batteryList/{{_id}}">{{serialNumber}}</a></td>
           <td>{{deviceId}}</td>
@@ -60,37 +63,5 @@
       {{/EasySearch.Each}}
     </table>
   </div>
-  <!--
-  <ul>
-    {{#EasySearch.Each index=batteryIndex}}
-      <li>Battery Serial Number: {{serialNumber}}</li>
-    {{/EasySearch.Each}}
-  </ul>
--->
-</template>
 
-<!--
-<template name="batteryTable">
-  <div>
-    <table>
-      <tr>
-
-          <th>Battery Serial Number</th>
-          <th>Device ID</th>
-          <th>Battery Percentage</th>
-          <th>Battery Charging Status</th>
-          <th>Timestamp</th>
-      </tr>
-      {{#each batteryList}}
-      <tr>
-        <td>{{serialNumber}}</td>
-        <td>{{deviceId}}</td>
-        <td>{{batteryPercentage}}</td>
-        <td>{{batteryChargingStatus}}</td>
-        <td>{{timestamp}}</td>
-      </tr>
-      {{/each}}
-    </table>
-  </div>
 </template>
--->

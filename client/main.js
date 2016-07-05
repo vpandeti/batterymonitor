@@ -13,7 +13,9 @@ testdb = new Mongo.Collection('testdb');
 batteryIndex = new EasySearch.Index({
   collection: batteryList,
   fields: ['serialNumber', 'deviceId', 'timestamp', 'batteryChargingStatus', 'batteryPercentage'],
-  engine: new EasySearch.Minimongo()
+  engine: new EasySearch.Minimongo({
+    sort: () => {batteryPercentage: 1}
+  })
 });
 
 /*
@@ -33,5 +35,10 @@ Template.searchform.events({
 });
 */
 Template.searchTable.helpers({
-  batteryIndex: () => batteryIndex
+  batteryIndex: () => batteryIndex,
+  attributes: () => {
+    return {
+      placeholder: 'Search here!'
+    };
+  }
 });
