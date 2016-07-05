@@ -1,5 +1,6 @@
 <head>
   <title>Battery Reporter</title>
+  <!--
   <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600' rel='stylesheet' type='text/css'>
   <style>
   table, th, td {
@@ -15,10 +16,51 @@
   }
 
   </style>
+  -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
 </head>
 
-<body>
-  <h1><a href="localhost:3000">Home</a></h1>
+<body style="margin:10px;">
+  <h1><img src="https://www.zebra.com/content/dam/zebra/logos-icons/brand/zebra-logo.png.adapt.full.png" alt="Zebra Technologies"/><a href="http://localhost:3000">Home</a></h1>
+  <br>
+  <ul class="nav nav-pills">
+    <li class="active"><a href="#">Battery Stats</a></li>
+    <li><a href="#">Application Stats</a></li>
+  </ul>
+
+  <div class="well">
+    <div class="container" style="margin-left:0px;padding-left:0px">
+      <div class="row">
+        <div style="float:left;margin:10px;">
+          <span class="label label-primary" style="font-size:16px;">Filter</span>
+        </div>
+        <div style="float:left;margin:1px;">
+          <div class="dropdown">
+            <button class="btn btn-default dropdown-toggle" type="button" id="filter-dropdown" data-toggle="dropdown">
+
+              <span class="caret"></span></button>
+              <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+                <li role="presentation"><a role="menuitem" href="#">Serial Number</a></li>
+                <li role="presentation"><a role="menuitem" href="#">Device Id</a></li>
+                <li role="presentation"><a role="menuitem" href="#">Decomission Status</a></li>
+                <li role="presentation"><a role="menuitem" href="#">Battery Level (%)</a></li>
+              </ul>
+            </div>
+          </div>
+          <div style="float:left;margin:1px;">
+            <input class="form-control" id="inputdefault" type="text">
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
 
   {{> searchTable}}
 <!--
@@ -44,12 +86,12 @@
   <br>
   <br>
   <div>
-    <table>
+    <table class="table table-bordered">
       <tr>
           <th>Battery Serial Number</th>
           <th>Device ID</th>
           <th>Battery Percentage</th>
-          <th>Battery Charging Status</th>
+          <th>Battery Decommission Status</th>
           <th>Timestamp</th>
       </tr>
       {{#EasySearch.Each index=batteryIndex attributes=inputAttributes}}
