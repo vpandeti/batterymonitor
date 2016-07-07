@@ -1,0 +1,151 @@
+{
+  "manufacturedDate": "2012-12-24",
+  "serialNumber": "A0920",
+  "partNumber": "82-160955-01 Rev.06",
+  "manufacturer": "Zebra Technologies",
+  "deviceId": "ffea072884ce6e02",
+  "compositeId": "A0920:Zebra Technologies:82-160955-01 Rev.06",
+  "batteryInfo": [
+    {
+      "timestamp": "2016-06-29 19:03:01.407",
+      "batteryPercentage": 255,
+      "batteryTemperature": 30,
+      "batteryChargingStatus": 2,
+      "powerSource": 2,
+      "backupBatteryVoltage": 2795,
+      "batteryDecommission": 0,
+      "ratedCapacity": 2600,
+      "batteryUsageNumber": 4,
+      "baseCumulativeCharge": 0,
+      "batteryVoltage": 2.7950000762939453
+    },
+    {
+      "timestamp": "2016-06-29 19:03:07.27",
+      "batteryPercentage": 255,
+      "batteryTemperature": 30,
+      "batteryChargingStatus": 2,
+      "powerSource": 2,
+      "backupBatteryVoltage": 2801,
+      "batteryDecommission": 0,
+      "ratedCapacity": 2600,
+      "batteryUsageNumber": 4,
+      "baseCumulativeCharge": 0,
+      "batteryVoltage": 2.8010001182556152
+    },
+    {
+      "timestamp": "2016-06-29 19:03:12.254",
+      "batteryPercentage": 255,
+      "batteryTemperature": 30,
+      "batteryChargingStatus": 2,
+      "powerSource": 2,
+      "backupBatteryVoltage": 2795,
+      "batteryDecommission": 0,
+      "ratedCapacity": 2600,
+      "batteryUsageNumber": 4,
+      "baseCumulativeCharge": 0,
+      "batteryVoltage": 2.7950000762939453
+    }
+  ],
+  "batterySippers": [
+    {
+      "timestamp": "2016-06-29 19:03:01.241",
+      "sippers": [
+        {
+          "sipper": "Phone idle",
+          "percentOfMax": 100,
+          "percentOfTotal": 1.677377086361468
+        },
+        {
+          "sipper": "Screen",
+          "percentOfMax": 74.47133818600102,
+          "percentOfTotal": 1.2491651626387392
+        },
+        {
+          "sipper": "system",
+          "percentOfMax": 18.383136395181484,
+          "percentOfTotal": 0.3083545176473498
+        },
+        {
+          "sipper": "com.android.camera2",
+          "percentOfMax": 18.165444188846795,
+          "percentOfTotal": 0.30470299845949694
+        }
+      ]
+    },
+    {
+      "timestamp": "2016-06-29 19:03:02.403",
+      "sippers": [
+        {
+          "sipper": "Phone idle",
+          "percentOfMax": 100,
+          "percentOfTotal": 1.677377086361468
+        },
+        {
+          "sipper": "Screen",
+          "percentOfMax": 74.47133818600102,
+          "percentOfTotal": 1.2491651626387392
+        },
+        {
+          "sipper": "system",
+          "percentOfMax": 18.383136395181484,
+          "percentOfTotal": 0.3083545176473498
+        },
+        {
+          "sipper": "com.android.camera2",
+          "percentOfMax": 18.165444188846795,
+          "percentOfTotal": 0.30470299845949694
+        }
+      ]
+    },
+    {
+      "timestamp": "2016-06-29 19:03:08.157",
+      "sippers": [
+        {
+          "sipper": "Phone idle",
+          "percentOfMax": 100,
+          "percentOfTotal": 1.677377086361468
+        },
+        {
+          "sipper": "Screen",
+          "percentOfMax": 74.47133818600102,
+          "percentOfTotal": 1.2491651626387392
+        },
+        {
+          "sipper": "system",
+          "percentOfMax": 18.383136395181484,
+          "percentOfTotal": 0.3083545176473498
+        },
+        {
+          "sipper": "com.android.camera2",
+          "percentOfMax": 18.165444188846795,
+          "percentOfTotal": 0.30470299845949694
+        }
+      ]
+    },
+    {
+      "timestamp": "2016-06-29 19:03:13.138",
+      "sippers": [
+        {
+          "sipper": "Phone idle",
+          "percentOfMax": 100,
+          "percentOfTotal": 1.677377086361468
+        },
+        {
+          "sipper": "Screen",
+          "percentOfMax": 74.47133818600102,
+          "percentOfTotal": 1.2491651626387392
+        },
+        {
+          "sipper": "system",
+          "percentOfMax": 18.383136395181484,
+          "percentOfTotal": 0.3083545176473498
+        },
+        {
+          "sipper": "com.android.camera2",
+          "percentOfMax": 18.165444188846795,
+          "percentOfTotal": 0.30470299845949694
+        }
+      ]
+    }
+  ]
+}

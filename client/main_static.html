@@ -1,0 +1,183 @@
+<html>
+<head>
+  <title>Battery Reporter</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <script src="batterystats.js"></script>
+  <script src="visualization.js"></script>
+  <script src="d3.min.js"></script>
+</head>
+
+<body style="margin:10px;">
+  <h1><img src="zebra2.png" alt="Zebra Technologies"/><a href="main.html">Home</a></h1>
+  <br>
+  <ul class="nav nav-pills">
+  	<li id="battery-stats-pills" class="active"><a href="#" onclick="managePills(true);">Battery wise Stats</a></li>
+  	<li id="application-stats-pills"><a href="#" onclick="managePills(false);">Application Wise Stats</a></li>
+  </ul>
+  <!-- <input class="form-control" id="batteryInput" type="text" style="float:right;width:200px;" placeholder="Battery Id"/> -->
+  </br>
+  <div id="battery-stats-filters" class="well" style="margin-top:0px;">
+	  <div class="container" style="margin-left:0px;padding-left:0px;width:100%">
+		  <div class="row">
+		      <!-- <div style="float:left;margin:10px;">
+		          <span class="label label-primary" style="font-size:16px;">Filters</span>
+		      </div> -->
+		      <div style="float:left;margin:1px;">
+					<div class="dropdown">
+					  <button class="btn btn-default dropdown-toggle" type="button" id="filter-dropdown-button" data-toggle="dropdown">Filters
+					  <span class="caret"></span></button>
+					  <ul id="filters-dropdown-ul" class="dropdown-menu" role="menu" aria-labelledby="menu1">
+					    <li role="presentation"><a role="menuitem" href="#">Filters</a></li>
+						<li role="presentation" class="divider"></li>
+						<li role="presentation"><a role="menuitem" href="#">Battery Level</a></li>
+					    <li role="presentation"><a role="menuitem" href="#">Serial Number</a></li>
+					    <li role="presentation"><a role="menuitem" href="#">Battery Decommission</a></li>
+					  </ul>
+				  </div>
+		      </div>
+		      <!-- <div style="float:left;margin:1px;">
+		      	<input class="form-control" id="inputdefault" type="text">
+		      </div> -->
+			  <div id="filter-battery-level-div" style="float:left;margin:1px;"> <!-- start of div - battery-level -->
+				<div style="float:left;margin:1px;"> <!-- Start - discharge div -->
+					<div class="dropdown">
+					  <button class="btn btn-default dropdown-toggle" type="button" id="filter-battery-level-dropdown-button-discharge" data-toggle="dropdown">> Discharge (%)
+					  <span class="caret"></span></button>
+					  <ul id="filter-battery-level-dropdown-ul-discharge" class="dropdown-menu" role="menu" aria-labelledby="menu1">						
+						<li role="presentation"><a role="menuitem" href="#">Discharge (%)</a></li>
+						<li role="presentation" class="divider"></li>
+						<li role="presentation"><a role="menuitem" href="#">100</a></li>
+						<li role="presentation"><a role="menuitem" href="#">95</a></li>
+						<li role="presentation"><a role="menuitem" href="#">90</a></li>
+						<li role="presentation"><a role="menuitem" href="#">85</a></li>
+						<li role="presentation"><a role="menuitem" href="#">80</a></li>
+						<li role="presentation"><a role="menuitem" href="#">75</a></li>
+						<li role="presentation"><a role="menuitem" href="#">70</a></li>
+						<li role="presentation"><a role="menuitem" href="#">65</a></li>
+						<li role="presentation"><a role="menuitem" href="#">60</a></li>
+						<li role="presentation"><a role="menuitem" href="#">55</a></li>
+						<li role="presentation"><a role="menuitem" href="#">50</a></li>
+						<li role="presentation"><a role="menuitem" href="#">45</a></li>
+						<li role="presentation"><a role="menuitem" href="#">40</a></li>
+						<li role="presentation"><a role="menuitem" href="#">35</a></li>
+						<li role="presentation"><a role="menuitem" href="#">30</a></li>
+						<li role="presentation"><a role="menuitem" href="#">25</a></li>
+						<li role="presentation"><a role="menuitem" href="#">20</a></li>
+						<li role="presentation"><a role="menuitem" href="#">15</a></li>
+						<li role="presentation"><a role="menuitem" href="#">10</a></li>
+						<li role="presentation"><a role="menuitem" href="#">5</a></li>
+					  </ul>
+					</div>
+				</div> <!-- End - discharge div -->
+				
+				<div style="float:left;margin:1px;">
+					<div class="dropdown">
+					  <button class="btn btn-default dropdown-toggle" type="button" id="filter-battery-level-dropdown-button-duration" data-toggle="dropdown">Duration (Hours)
+					  <span class="caret"></span></button>
+					  <ul id="filter-battery-level-dropdown-ul-duration" class="dropdown-menu" role="menu" aria-labelledby="menu1">				
+						<li role="presentation"><a role="menuitem" href="#">Duration (Hours)</a></li>
+						<li role="presentation" class="divider"></li>
+						<li role="presentation"><a role="menuitem" href="#">8</a></li>
+						<li role="presentation"><a role="menuitem" href="#">6</a></li>
+						<li role="presentation"><a role="menuitem" href="#">4</a></li>
+						<li role="presentation"><a role="menuitem" href="#">2</a></li>
+						<li role="presentation"><a role="menuitem" href="#">1</a></li>
+					  </ul>
+					</div>
+				</div>
+				<div style="float:left;margin:1px;">
+					<input id="filter-battery-level-button-submit" class="btn btn-primary" type="submit" value="Submit">
+				</div>
+			  </div> <!-- end of div filter-battery-level -->
+			  <div id="filter-serial-number-div" style="float:left;margin:1px;"> <!-- start of div filter-serial-number -->
+				<div style="float:left;margin:1px;">
+					<input class="form-control" id="filter-serial-number-input" type="text">
+				</div>
+				<div style="float:left;margin:1px;">
+					<input id="filter-serial-number-button-submit" class="btn btn-primary" type="submit" value="Submit">
+				</div>
+			  </div> <!-- end of div filter-serial-number -->
+			  <div id="filter-decommission-div" style="float:left;margin:1px;"> <!-- start of div filter-decommission -->
+				<div style="float:left;margin:1px;">
+					<div class="dropdown">
+					  <button class="btn btn-default dropdown-toggle" type="button" id="filter-decommission-dropdown-button-range" data-toggle="dropdown">Range
+					  <span class="caret"></span></button>
+					  <ul id="filter-decommission-dropdown-ul-range" class="dropdown-menu" role="menu" aria-labelledby="menu1">				
+						<li role="presentation"><a role="menuitem" href="#">Range</a></li>
+						<li role="presentation" class="divider"></li>
+						<li role="presentation"><a role="menuitem" href="#">Greater than</a></li>
+						<li role="presentation"><a role="menuitem" href="#">Less than</a></li>
+						<li role="presentation"><a role="menuitem" href="#">Equals</a></li>
+					  </ul>
+					</div>
+				</div>
+				<div style="float:left;margin:1px;">
+					<div class="dropdown">
+					  <button class="btn btn-default dropdown-toggle" type="button" id="filter-decommission-dropdown-button-range-values" data-toggle="dropdown">Range Values
+					  <span class="caret"></span></button>
+					  <ul id="filter-decommission-dropdown-ul-range-values" class="dropdown-menu" role="menu" aria-labelledby="menu1">				
+						<li role="presentation"><a role="menuitem" href="#">Range Values</a></li>
+						<li role="presentation" class="divider"></li>
+						<li role="presentation"><a role="menuitem" href="#">100</a></li>
+						<li role="presentation"><a role="menuitem" href="#">95</a></li>
+						<li role="presentation"><a role="menuitem" href="#">90</a></li>
+						<li role="presentation"><a role="menuitem" href="#">85</a></li>
+						<li role="presentation"><a role="menuitem" href="#">80</a></li>
+						<li role="presentation"><a role="menuitem" href="#">75</a></li>
+						<li role="presentation"><a role="menuitem" href="#">70</a></li>
+						<li role="presentation"><a role="menuitem" href="#">65</a></li>
+						<li role="presentation"><a role="menuitem" href="#">60</a></li>
+						<li role="presentation"><a role="menuitem" href="#">55</a></li>
+						<li role="presentation"><a role="menuitem" href="#">50</a></li>
+						<li role="presentation"><a role="menuitem" href="#">45</a></li>
+						<li role="presentation"><a role="menuitem" href="#">40</a></li>
+						<li role="presentation"><a role="menuitem" href="#">35</a></li>
+						<li role="presentation"><a role="menuitem" href="#">30</a></li>
+						<li role="presentation"><a role="menuitem" href="#">25</a></li>
+						<li role="presentation"><a role="menuitem" href="#">20</a></li>
+						<li role="presentation"><a role="menuitem" href="#">15</a></li>
+						<li role="presentation"><a role="menuitem" href="#">10</a></li>
+						<li role="presentation"><a role="menuitem" href="#">5</a></li>
+					  </ul>
+					</div>
+				</div>
+				<div style="float:left;margin:1px;">
+					<input id="filter-decommission-button-submit" class="btn btn-primary" type="submit" value="Submit">
+				</div>
+			  </div> <!-- end of div filter-decommission -->
+			  <div id="charts-type" style="float:right;margin:1px;">
+		      	<a href="#" onclick="showPie()"><img src="pie.png" width="32px" height="32px" style="margin-right: 12px;"/></a>
+				<a href="#" onclick="showStacks();" style="float:right;"><img src="bar.png" width="32px" height="32px"/></a>
+		      </div>
+		  </div>
+	  </div>
+  </div>
+  <div id="battery-stats-table">
+    <table class="table table-bordered">
+      <tr style="background-color:f5f5f5;">
+          <th>Battery Serial Number</th>
+          <th>Device ID</th>
+          <th>Battery Percentage</th>
+          <th>Battery Charging Status</th>
+          <th>Timestamp</th>
+      </tr>
+        <tr>
+          <td>12344dd123</td>
+          <td>hqwesa123l</td>
+          <td>99</td>
+          <td>1</td>
+          <td>1201564320</td>
+        </tr>
+    </table>
+  </div>
+  
+  <div id="chart">
+  	
+  </div>
+</body>
+</html>
