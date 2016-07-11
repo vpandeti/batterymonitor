@@ -1,13 +1,8 @@
 var width = 1000, height = 450, padding = 20;
 var fontFamily = 'verdana';
-var barFillColor = 'steelblue';
-var barFocusColor = 'yellow';
-var strokeColor = '#F00226';
-var toolTipBackground = '#FFF';
-var binVariables = [ 0, 1, 2 ], chartIndex = 0;
 var pieData = [];
 var pieDataColor = '#FFF';
-var jsonData, rawJson;
+var jsonData;
 
 // Store the displayed angles in _current.
 // Then, interpolate from _current to the new angles.
