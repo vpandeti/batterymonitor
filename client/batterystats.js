@@ -1,7 +1,7 @@
 var caret = "<span class=\"caret\" style=\"margin-left:5px;\"></span>";
 var  batteryLevelDischarge, batteryLevelDuration;
 var range, rangeValues;
-var url = "http://batterymonitor.herokuapp.com/api/";
+var url = "http://10.11.37.52:3000/";
 $(document).ready(function(){
     $("#filter-battery-level-div").hide();
 	$("#filter-serial-number-div").hide();
@@ -24,19 +24,15 @@ function managePills(isStats) {
 }
 
 function displayBatteryStats() {
-	// $("#battery-stats-filters").show();
 	$("#battery-stats-table").show();
 	$("#chart").hide();
 	$("#charts-type").hide();
-	// $("#batteryInput").hide();
 }
 
 function displayApplicationStats() {
-	// $("#battery-stats-filters").hide();
 	$("#battery-stats-table").hide();
 	$("#chart").show();
 	$("#charts-type").show();
-	// $("#batteryInput").show();
 	enableSaveButton(false);
 }
 
@@ -44,7 +40,6 @@ $(function(){
 
     $("#filters-dropdown-ul li a").click(function(){
 		$("#filter-dropdown-button").html($(this).text() + caret);
-		// $("#filter-dropdown-button").val($(this).text());
 		enableSaveButton(false);
 		if($(this).text() == "Battery Level") {
 			$("#filter-battery-level-div").show();
@@ -67,7 +62,6 @@ $(function(){
 
     $("#filter-battery-level-dropdown-ul-discharge li a").click(function(){
 		$("#filter-battery-level-dropdown-button-discharge").html($(this).text() + caret);
-		// $("#filter-battery-level-dropdown-button-from").val($(this).text());
 		batteryLevelDischarge = $(this).text();
    });
 
@@ -77,7 +71,6 @@ $(function(){
 
     $("#filter-battery-level-dropdown-ul-duration li a").click(function(){
 		$("#filter-battery-level-dropdown-button-duration").html($(this).text() + caret);
-		// $("#filter-battery-level-dropdown-button-duration").val($(this).text());
 		batteryLevelDuration = $(this).text();
    });
 
@@ -85,44 +78,16 @@ $(function(){
 
 $(function(){
 	$("#filter-battery-level-button-submit").click(function(){
-		var url = url + "batteryListWithDischarge?batteryLevelDischarge=" + batteryLevelDischarge + "&batteryLevelDuration" + batteryLevelDuration;
-		$.ajax({
-            type: "GET", //REST Type
-            dataType: 'jsonp',
-            url: url,
-            async: false,
-            contentType: "application/json; charset=utf-8",
-            success: function (msg) {
-                console.log(msg);
-				enableSaveButton(true);				
-			},
-			error: function (msg) {
-				console.log(msg);
-				enableSaveButton(false);
-			}
-		});
+		var u = url + "timestamp?drop=" + batteryLevelDischarge + "&duration=" + batteryLevelDuration;
+		serverAPICall(u, onSuccess, onFail);
 	});
 
 });
 
 $(function(){
 	$("#filter-serial-number-button-submit").click(function(){
-		var url = url + "batteryListWithSerialNumber?serialNumber=" + $("#filter-serial-number-input").val();
-		$.ajax({
-            type: "GET", //REST Type
-            dataType: 'jsonp',
-            url: url,
-            async: false,
-            contentType: "application/json; charset=utf-8",
-            success: function (msg) {
-                console.log(msg);
-				enableSaveButton(true);
-			},
-			error: function (msg) {
-				console.log(msg);
-				enableSaveButton(false);
-			}
-		});
+		var u = url + "serialNumber?searchText=" + $("#filter-serial-number-input").val();
+		serverAPICall(u, onSuccess, onFail);
 	});
 
 });
@@ -131,7 +96,6 @@ $(function(){
 
     $("#filter-decommission-dropdown-ul-range li a").click(function(){
 		$("#filter-decommission-dropdown-button-range").html($(this).text() + caret);
-		// $("#filter-battery-level-dropdown-button-to").val($(this).text());
 		range = $(this).text();
 		if(range == "Greater than")
 			range = "G";
@@ -147,7 +111,6 @@ $(function(){
 
     $("#filter-decommission-dropdown-ul-range-values li a").click(function(){
 		$("#filter-decommission-dropdown-button-range-values").html($(this).text() + caret);
-		// $("#filter-battery-level-dropdown-button-to").val($(this).text());
 		rangeValues = $(this).text();
    });
 
@@ -155,22 +118,8 @@ $(function(){
 
 $(function(){
 	$("#filter-decommission-button-submit").click(function(){
-		var url = url + "batteryListWithDecommission?rangeType=" + range + "&rangeValues=" + rangeValues;
-		$.ajax({
-            type: "GET", //REST Type
-            dataType: 'jsonp',
-            url: url,
-            async: false,
-            contentType: "application/json; charset=utf-8",
-            success: function (msg) {
-                console.log(msg);
-				enableSaveButton(true);
-			},
-			error: function (msg) {
-				console.log(msg);
-				enableSaveButton(false);
-			}
-		});
+		var u = url + "batteryListWithDecommission?rangeType=" + range + "&rangeValues=" + rangeValues;
+		serverAPICall(u, onSuccess, onFail);
 	});
 
 });
@@ -180,5 +129,31 @@ function enableSaveButton(enable) {
 		$("#filter-save-reports-button-submit").show();
 	else
 		$("#filter-save-reports-button-submit").hide();
+}
+
+function onSuccess(msg) {
+	enableSaveButton(false);
+}
+
+function onFail(msg) {
+	enableSaveButton(true);
+}
+
+function serverAPICall(url, successCallback, errorCallback) {
+	$.ajax({
+            type: "GET", //REST Type
+            dataType: 'jsonp',
+            url: url,
+            async: false,
+            contentType: "application/json; charset=utf-8",
+            success: function (msg) {
+                console.log(msg);
+				successCallback.call(msg);
+			},
+			error: function (msg) {
+				console.log(msg);
+				errorCallback.call(msg);
+			}
+	});
 }
 
